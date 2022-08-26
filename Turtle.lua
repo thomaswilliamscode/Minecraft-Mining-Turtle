@@ -41,9 +41,14 @@ Turtle = {  -- variables --
           end
       print('Starting With A Fuel Level Of:',Turtle.fuelLevel)
       end,
+
+    -- StartUp Function that Checks Fuel Levels, Torch Amounts, and Cob Amounts before being able to Proceed. -- 
+    startUp = function()
+      Turtle.startingFuel()
+    end,
              
 } 
 
--- Check Fuel lvl -- 
+-- StartUp Function -- 
 
-Turtle.startingFuel()
+Turtle.startUp()
