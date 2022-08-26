@@ -1,7 +1,7 @@
 -- Turtle Object --
 
 Turtle = {  -- variables -- 
-            minFuelLevel = 20000, 
+            minFuelLevel = 5000, 
             fuelLevel = 0,
 
       -- functions -- 
@@ -16,15 +16,34 @@ Turtle = {  -- variables --
         Turtle.fuelLevel = turtle.getFuelLevel()
         end,
 
+      -- This checks all inventory slots for fuel and tries to refuel -- 
+      reFuel = function()
+        for i = 1, 16 do 
+          turtle.select(i)
+          turtle.refuel()
+        end 
+      end,
+
       -- Fuel check must pass to continue -- 
       startingFuel = function()
           Turtle.setFuelLevel()
-          if Turtle.fuelLevel < Turtle.minFuelLevel then
+          local count = 1
+          while Turtle.fuelLevel < Turtle.minFuelLevel do
+            print('I Need A Fuel Level Of ', Turtle.minFuelLevel)
+            print('Currently I have A Fuel Level Of ', Turtle.fuelLevel)
+            print(count)
+            print()
+            count = count + 1
+            sleep(10)
+            Turtle.reFuel()
+            if Turtle.fuelLevel >= Turtle.minFuelLevel then 
+               break end
+          end
+      print('Starting With A Fuel Level Of:',Turtle.fuelLevel)
+      end,
              
 } 
 
 -- Check Fuel lvl -- 
 
-turtle.refuel()
-Turtle.setFuelLevel()
-print('Fuel Level is: ', Turtle.getFuelLevel()) 
+Turtle.startingFuel()
