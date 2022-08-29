@@ -1,6 +1,8 @@
 -- Turtle Object --
 
 Turtle = {  -- variables -- 
+            inventoryName = {},
+            inventoryCount = {},
             minFuelLevel = 5000, 
             fuelLevel = 0,
             torchName = 'minecraft:torch',
@@ -60,6 +62,22 @@ Turtle = {  -- variables --
         -- end
       -- end,
 
+      -- Inventory Management -- 
+      inventoryCheck = function()
+        for i = 1, 16 do 
+            turtle.select(i)
+            Turtle.data = turtle.getItemDetail()
+            if Turtle.data == nill then 
+               Turtle.inventoryName[i] = 0
+               Turtle.inventoryCount[i] = 0
+            else 
+               Turtle.inventoryName[i] = Turtle.data.name
+               Turtle.inventoryCount[i] = Turtle.data.count           
+            end
+            
+        end
+      end,
+
       -- Making Sure You Have Torches In Slot 1, And Cob In Slot 2 -- 
       invStart = function()
         for i = 1, 2 do
@@ -92,6 +110,8 @@ Turtle = {  -- variables --
 
 -- StartUp Function -- 
 
-Turtle.startUp()
+Turtle.inventoryCheck()
+print(Turtle.inventoryName[2])
+print(Turtle.inventoryCount[2])
 
 
