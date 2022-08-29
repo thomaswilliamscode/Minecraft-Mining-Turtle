@@ -3,9 +3,12 @@
 Turtle = {  -- variables -- 
             minFuelLevel = 5000, 
             fuelLevel = 0,
+            torchName = 'minecraft:torch',
             torchSlot = 1,
             torchAmount = 0,
-            torchName = 'minecraft:torch',
+            cobName = 'minecraft:cobblestone',
+            cobSlot = 0,
+            cobAmount = 0,
             data = turtle.getItemDetail(),
 
 
@@ -57,13 +60,20 @@ Turtle = {  -- variables --
         -- end
       -- end,
 
+      -- Making Sure You Have Torches In Slot 1, And Cob In Slot 2 -- 
+      invStart = function()
+        for i = 1, 2 do
+          turtle.select(i)
+          while Turtle.data == nill do
+             print('I Need Torches And Cob Please.')
+             sleep(10)
+             Turtle.data = turtle.getItemDetail()
+          end
+        end 
+      end, 
+    
       -- Starting Torch Level -- 
       torchStart = function()
-        while Turtle.data == nill do
-           print('I Need Starting Inventory Items Please.')
-           sleep(10)
-           Turtle.data = turtle.getItemDetail()
-        end
         while Turtle.data.name ~= Turtle.torchName do 
           print('I Need Torches In Slot 1 Please.')
           sleep(10)
