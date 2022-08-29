@@ -3,6 +3,12 @@
 Turtle = {  -- variables -- 
             minFuelLevel = 5000, 
             fuelLevel = 0,
+            torchSlot = 1,
+            torchAmount = 0,
+            torchName = 'minecraft:torch',
+            data = turtle.getItemDetail(),
+
+
 
       -- functions -- 
 
@@ -42,13 +48,40 @@ Turtle = {  -- variables --
       print('Starting With A Fuel Level Of:',Turtle.fuelLevel)
       end,
 
-    -- StartUp Function that Checks Fuel Levels, Torch Amounts, and Cob Amounts before being able to Proceed. -- 
-    startUp = function()
-      Turtle.startingFuel()
-    end,
+      -- if data then -- 
+      -- dataPrint = function()
+        -- if Turtle.data then
+          -- print("Item name: ", Turtle.data.name)
+          -- print("Item damage value: ", Turtle.data.damage)
+          -- print("Item count: ", Turtle.data.count)
+        -- end
+      -- end,
+
+      -- Starting Torch Level -- 
+      torchStart = function()
+        while Turtle.data == nill do
+           print('I Need Starting Inventory Items Please.')
+           sleep(10)
+           Turtle.data = turtle.getItemDetail()
+        end
+        while Turtle.data.name ~= Turtle.torchName do 
+          print('I Need Torches In Slot 1 Please.')
+          sleep(10)
+          Turtle.data = turtle.getItemDetail()
+        end
+        Turtle.torchAmount = Turtle.data.count
+      end,
+
+      -- StartUp Function that Checks Fuel Levels, Torch Amounts, and Cob Amounts before being able to  Proceed. -- 
+      startUp = function()
+        Turtle.startingFuel()
+        Turtle.torchStart()
+      end,
              
 } 
 
 -- StartUp Function -- 
 
 Turtle.startUp()
+
+
